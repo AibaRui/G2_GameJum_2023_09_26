@@ -88,7 +88,7 @@ public class MapControl : MonoBehaviour
     {
         float h = _goalPos.position.z - _playerT.position.z;
 
-        if (Mathf.Abs(h) < 1f)
+        if (Mathf.Abs(h) < 3f)
         {
             SpownNewMap();
         }
@@ -116,6 +116,7 @@ public class MapControl : MonoBehaviour
         go.transform.position = pos;
 
         go.GetComponent<MapObstacleSet>().Init(go.transform);
+        go.GetComponent<MapDecoration>().Init(go.transform);
 
         _maps.Add(go);
         _mapsRb.Add(go.GetComponent<Rigidbody>());

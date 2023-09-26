@@ -9,11 +9,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 518819698, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
       propertyPath: m_Size.x
-      value: 4.05
+      value: 2.09
       objectReference: {fileID: 0}
     - target: {fileID: 518819698, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
       propertyPath: m_Size.y
-      value: 2.67
+      value: 1.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 518819698, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
+      propertyPath: m_Center.y
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 921951687244511027, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: 1404182249865875313, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
       propertyPath: m_Sprite
@@ -67,5 +75,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}

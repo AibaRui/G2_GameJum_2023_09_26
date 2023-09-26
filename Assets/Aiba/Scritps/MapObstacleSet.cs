@@ -39,11 +39,8 @@ public class MapObstacleSet : MonoBehaviour
                 int objR = Random.Range(0, _obstacles.Count);
 
                 var go = Instantiate(_obstacles[objR]);
-                float randamX = Random.Range(-_side, _side);
-                Vector3 setPos = pos.position + new Vector3(randamX,0,0);
-                go.transform.position = setPos;
-
-                go.transform.SetParent(parent);
+                go.transform.SetParent(pos);
+                go.transform.localPosition = Vector3.zero;
             }
             else
             {
@@ -52,8 +49,9 @@ public class MapObstacleSet : MonoBehaviour
                 var go = Instantiate(_dashPanel);
                 float randamX = Random.Range(-_side, _side);
                 Vector3 setPos = pos.position + new Vector3(randamX, 0, 0);
-                go.transform.position = setPos;
-                go.transform.SetParent(parent);
+
+                go.transform.SetParent(pos);
+                go.transform.localPosition = Vector3.zero;
                 _isDash = true;
             }
         }
