@@ -29,9 +29,9 @@ public class SceneController : MonoBehaviour
     public async void FadeAndNextScene(string nextSnene)
     {
         _fadeImage.gameObject.SetActive(true);
-        await _fadeImage.DOFade(1, _fadeTime);
+        await _fadeImage.DOFade(1, _fadeTime).SetEase(Ease.InSine);
         await SceneManager.LoadSceneAsync(nextSnene);
-        await _fadeImage.DOFade(0, _fadeTime);
+        await _fadeImage.DOFade(0, _fadeTime).SetEase(Ease.InSine);
         _fadeImage.gameObject.SetActive(false);
     }
 }
