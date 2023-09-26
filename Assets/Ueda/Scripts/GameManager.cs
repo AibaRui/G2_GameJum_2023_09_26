@@ -135,5 +135,12 @@ public class GameManager : MonoBehaviour
             _currentScore = 0;
         }
     }
-
+    public void AddSpeed(float speed)
+    {
+        _currentSpeed += speed ;
+        if(_currentSpeed < 0 )
+        {
+            _currentSpeed= 0;
+        }
+    }
 }
