@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
         Gear3,
         Gear4,
     }
+    [SerializeField] UI _UIcomp;
+    [SerializeField] float _UIduration = 0.2f;
     [SerializeField] Text _countDownText;
     [SerializeField] float _timeLimit = 60.0f;
     [SerializeField] float _countDownTime = 3.0f;
@@ -84,6 +86,8 @@ public class GameManager : MonoBehaviour
             //print($"CurrentScore :{CurrentScore}");
             //print($"CurrentTime :{CurrentTime}");
             GearObserve(_currentSpeed);
+            _UIcomp.TimeText(_currentTime);
+            _UIcomp.slider(_currentSpeed);
             if ( _currentTime < 0.0f )
             {
                 GameOver();
@@ -128,6 +132,7 @@ public class GameManager : MonoBehaviour
     }
     public void AddScore(int score)
     {
+        _UIcomp.Play(_currentScore , (_currentScore + score > 0) ? _currentScore + score : 0 , _UIduration);
         _currentScore += score ;
         if(_currentScore < 0 )
         {
