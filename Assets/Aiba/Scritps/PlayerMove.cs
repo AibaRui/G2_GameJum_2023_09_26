@@ -14,21 +14,10 @@ public class PlayerMove
     [Header("Œ´‘¥“x")]
     [SerializeField] private float _slowSpeed;
 
-    private float _setSpeed = 0;
-
-    private float _beforInput = 0;
-
-    private bool _isChangeSpeed = false;
-
     private PlayerControl _playerControl;
     public void Init(PlayerControl playerControl)
     {
         _playerControl = playerControl;
-    }
-
-    public void SetSpeed()
-    {
-
     }
 
     public void Move(float h)
@@ -48,7 +37,6 @@ public class PlayerMove
         }
         else
         {
-            _setSpeed = 0;
             if (_playerControl.Rigidbody.velocity.x == 0) return;
 
                 if (_playerControl.Rigidbody.velocity.x > 0)
@@ -71,8 +59,6 @@ public class PlayerMove
                 }
             }
         }   //Œ¸‘¬ˆ—
-
-        _beforInput = h;
     }
 
 }
