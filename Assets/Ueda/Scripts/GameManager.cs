@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Events;
+
 public class GameManager : MonoBehaviour
 {
     public enum Gear
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     public float CurrentTime => _currentTime;
     public float CurrentSpeed => _currentSpeed;
     public Gear NowGear => _nowGear;
+    public UnityEvent _startEvent;
     private void Awake()
     {
         if (instance == null)
@@ -65,12 +68,11 @@ public class GameManager : MonoBehaviour
         }
         _countDownText.gameObject.SetActive(false);
         callback();
-        //_startEvent?.Invoke();
-        //_nowGame = StartCoroutine(GameTimer());
     }
     void GameStart()
     {
         _isActive = true;
+        _startEvent?.Invoke();
     }
     void Update()
     {
