@@ -15,9 +15,10 @@ public class ObstacleManager : MonoBehaviour, IDamageble
         {
             GameManager.Instance.AddSpeed(_addSpeed);
             GameManager.Instance.AddScore(_score);
+            _spriteRenderer.color = new Color(0, 0, 0, 0);
             ParticleSystem particle = Instantiate(_particle, this.transform.position, this.transform.rotation);
             particle.Play();
-            _spriteRenderer.color = new Color(0, 0, 0, 0); Destroy(this.gameObject, _waitTime);
+            Destroy(this.gameObject, _waitTime);
         }
         else
         {
