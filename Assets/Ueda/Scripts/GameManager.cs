@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         Gear3,
         Gear4,
     }
-    [SerializeField] Text CountDownText;
+    [SerializeField] Text _countDownText;
     [SerializeField] float _timeLimit = 60.0f;
     [SerializeField] float _countDownTime = 3.0f;
     [SerializeField] float _speedUpRate = 1.0f;
@@ -49,25 +49,22 @@ public class GameManager : MonoBehaviour
     {
         float timer = time;
         string text = "";
-        //_timeText.color = Color.red;
-        //_scoreText.gameObject.transform.parent.gameObject.SetActive(true);
-        //_timeText.gameObject.transform.parent.gameObject.SetActive(true);
+        _countDownText.gameObject.SetActive(true);
         while (timer > 0f)
         {
             timer -= Time.deltaTime;
-            if(text != timer.ToString("0") && text != "Start !!")
+            if(text != timer.ToString("0") && text != "Start !")
             {
                 text = timer.ToString("0");
-                if(text == "0")
-                {
-                    text = "Start !!";
-                }
-                print(text);
+                if (text == "0")
+                    text = "Start !";
+                _countDownText.text = text;
+                _countDownText.transform.DOScale(2f, 0.3f).OnComplete(() => _countDownText.transform.DOScale(1f, 0.3f));
             }
             yield return null;
         }
+        _countDownText.gameObject.SetActive(false);
         callback();
-        //_timeText.text = " Start !! ";
         //_startEvent?.Invoke();
         //_nowGame = StartCoroutine(GameTimer());
     }
@@ -81,7 +78,7 @@ public class GameManager : MonoBehaviour
         {
             _currentTime -= Time.deltaTime;
             _currentSpeed += Time.deltaTime * _speedUpRate;
-            print($"CurrentSpeed :{CurrentSpeed}");
+            //print($"CurrentSpeed :{CurrentSpeed}");
             //print($"CurrentScore :{CurrentScore}");
             //print($"CurrentTime :{CurrentTime}");
             GearObserve(_currentSpeed);
@@ -143,4 +140,29 @@ public class GameManager : MonoBehaviour
             _currentSpeed= 0;
         }
     }
+    //IEnumerator CountDown(float time, Action callback)
+    //{
+    //    float timer = time;
+    //    int iTime = -1;
+    //    //_timeText.color = Color.red;
+    //    //_scoreText.gameObject.transform.parent.gameObject.SetActive(true);
+    //    //_timeText.gameObject.transform.parent.gameObject.SetActive(true);
+    //    _countDownImage.gameObject.SetActive(true);
+    //    while (timer > 0f)
+    //    {
+    //        timer -= Time.deltaTime;
+    //        if (iTime != (int)(timer + 0.5f))
+    //        {
+    //            iTime = (int)(timer + 0.5f);
+    //            _countDownImage.sprite = _countDownSprite[iTime];
+    //            _countDownImage.SetNativeSize();
+    //            _countDownImage.transform.DOScale(2f, 0.3f).OnComplete(() => _countDownImage.transform.DOScale(1f, 0.3f));
+    //        }
+    //        yield return null;
+    //    }
+    //    _countDownImage.gameObject.SetActive(false);
+    //    callback();
+    //    //_startEvent?.Invoke();
+    //    //_nowGame = StartCoroutine(GameTimer());
+    //}
 }
