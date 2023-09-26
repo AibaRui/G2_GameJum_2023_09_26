@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapMoveControl : MonoBehaviour
+public class MapControl : MonoBehaviour
 {
     [Header("マップのプレハブ")]
     [SerializeField] private GameObject _mapPrefab;
@@ -13,6 +13,12 @@ public class MapMoveControl : MonoBehaviour
     [Header("初期マップ")]
     [SerializeField] private List<GameObject> _firstMaps = new List<GameObject>();
 
+    [Header("速さ設定")]
+    [SerializeField] private List<float> _speeds = new List<float>(4);
+
+
+
+
     [Header("確認用_マップのロール速度")]
     [SerializeField] private float _moveSpeed = 5;
 
@@ -22,7 +28,7 @@ public class MapMoveControl : MonoBehaviour
     [Header("確認用")]
     [SerializeField] private List<Rigidbody> _mapsRb = new List<Rigidbody>();
 
-    
+
 
     private Transform _goalPos;
 
@@ -44,6 +50,7 @@ public class MapMoveControl : MonoBehaviour
     {
         Check();
         CheckDestroy();
+        SetSpeed();
     }
 
     private void FixedUpdate()
@@ -55,6 +62,27 @@ public class MapMoveControl : MonoBehaviour
         }
     }
 
+    public void SetSpeed()
+    {
+        switch (GameManager.Instance.NowGear)
+        {
+            case GameManager.Gear.Gear0:
+                _moveSpeed = _speeds[0];
+                break;
+            case GameManager.Gear.Gear1:
+                _moveSpeed = _speeds[1];
+                break;
+            case GameManager.Gear.Gear2:
+                _moveSpeed = _speeds[2];
+                break;
+            case GameManager.Gear.Gear3:
+                _moveSpeed = _speeds[3];
+                break;
+            case GameManager.Gear.Gear4:
+                _moveSpeed = _speeds[4];
+                break;
+        }
+    }
 
     public void Check()
     {
@@ -72,7 +100,7 @@ public class MapMoveControl : MonoBehaviour
 
         float h = _maps[0].transform.position.z - _playerT.position.z;
 
-        if (h < -_mapPrefab.transform.localScale.z / 2)
+        if (h < -(_mapPrefab.transform.localScale.z / 2+2))
         {
             var go = _maps[0];
             _maps.RemoveAt(0);
@@ -86,6 +114,8 @@ public class MapMoveControl : MonoBehaviour
         Vector3 pos = _maps[0].transform.position + new Vector3(0, 0, _mapPrefab.transform.localScale.z * 2);
         var go = Instantiate(_mapPrefab);
         go.transform.position = pos;
+
+        go.GetComponent<MapObstacleSet>().Init(go.transform);
 
         _maps.Add(go);
         _mapsRb.Add(go.GetComponent<Rigidbody>());
