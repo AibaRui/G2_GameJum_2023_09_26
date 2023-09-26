@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         _isActive = false;
+        SceneController.Instance?.FadeAndNextScene("result");
     }
     public void AddScore(int score)
     {
