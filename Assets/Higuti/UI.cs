@@ -18,7 +18,7 @@ public class UI : MonoBehaviour
     }
     public void TimeText(float timer)
     {
-        timerText.text = timer.ToString("0000");
+        timerText.text = timer.ToString("00.00");
     }
 
     public void ScoreText(int score)
