@@ -7,7 +7,7 @@ public class ObstacleManager : MonoBehaviour, IDamageble
     [SerializeField] float _decreaseSpeed = -1.0f;
     [SerializeField] ParticleSystem _particle = null;
     [SerializeField] float _waitTime = 0;
-    [SerializeField] SpriteRenderer _spriteRenderer;
+    [SerializeField] SpriteRenderer _spriteRenderer = null;
 
     public void Hit()
     {

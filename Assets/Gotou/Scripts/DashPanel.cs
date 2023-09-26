@@ -3,6 +3,7 @@ using UnityEngine;
 public class DashPanel : MonoBehaviour, IDamageble
 {
     [SerializeField] float _addSpeed = 100.0f;
+    [SerializeField] SpriteRenderer _spriteRenderer = null;
 
     public void Hit()
     {
