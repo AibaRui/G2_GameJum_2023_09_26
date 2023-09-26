@@ -18,16 +18,16 @@ public class UI : MonoBehaviour
     }
     public void TimeText(float timer)
     {
-        timerText.text = timer.ToString("f2");
+        timerText.text = timer.ToString("0000");
     }
 
     public void ScoreText(int score)
     {
-        scoreText.text = score.ToString("f2");
+        scoreText.text = score.ToString("0000");
     }
     public void SpeedText(float speed)
     {
-        speedText.text = speed.ToString("f2");
+        speedText.text = speed.ToString("0000");
     }
 
     public int DrawValue => _drawValue;
