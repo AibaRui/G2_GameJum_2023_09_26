@@ -9,7 +9,6 @@ public class UI : MonoBehaviour
     [SerializeField] Text scoreText;
     [SerializeField] Text timerText;
     [SerializeField] Text speedText;
-    [SerializeField] Text startText;
     [SerializeField] Slider Speedslider;
     private int _drawValue = 0;
 
@@ -30,10 +29,7 @@ public class UI : MonoBehaviour
     {
         speedText.text = speed.ToString("f2");
     }
-    public void StartText(string start)
-    {
-        startText.text = start;
-    }
+
     public int DrawValue => _drawValue;
     public void Play(int initialValue, int endValue, float duration)
     {
