@@ -532,11 +532,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
       propertyPath: _timeLimit
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _speedUpRate
-      value: 80
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5464324621243175321, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
       propertyPath: m_RootOrder
