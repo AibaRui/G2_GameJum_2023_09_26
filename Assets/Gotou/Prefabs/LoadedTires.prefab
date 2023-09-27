@@ -16,6 +16,10 @@ PrefabInstance:
       value: LoadedTiresSpritre
       objectReference: {fileID: 0}
     - target: {fileID: 1534340770386937811, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
+      propertyPath: _score
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1534340770386937811, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
       propertyPath: _breakEffect
       value: 
       objectReference: {fileID: 6069660462994109741, guid: a87c3f3a7de968d44b7634066b7141ed, type: 3}

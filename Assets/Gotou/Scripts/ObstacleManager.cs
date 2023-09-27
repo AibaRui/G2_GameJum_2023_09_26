@@ -16,6 +16,7 @@ public class ObstacleManager : MonoBehaviour, IDamageble
         // NowGearが4以上の時のみ破壊できる
         if (GameManager.Instance.NowGear == GameManager.Gear.Gear4 || GameManager.Instance.NowGear == GameManager.Gear.Gear5)
         {
+            AudioManager.Instance.PlaySE(AudioManager.SEType.Destruction);
             // スコアの加算
             GameManager.Instance.AddSpeed(_addSpeed);
             // 加速処理
@@ -29,6 +30,7 @@ public class ObstacleManager : MonoBehaviour, IDamageble
         }
         else   // それ以下の時は減速する
         {
+            AudioManager.Instance.PlaySE(AudioManager.SEType.Clash);
             // 減速処理
             GameManager.Instance.AddSpeed(_decreaseSpeed);
             // 煙の生成、再生

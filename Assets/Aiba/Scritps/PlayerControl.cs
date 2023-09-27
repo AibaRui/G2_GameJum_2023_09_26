@@ -27,6 +27,9 @@ public class PlayerControl : MonoBehaviour
     [Header("èIÇÌÇËÇÃTimeLine_GearÇªÇÃëº")]
     [SerializeField] private PlayableDirector _timeLineGearOther;
 
+    [Header("ïóÇÃâπ")]
+    [SerializeField] private ParticleSystem _window;
+
     [SerializeField] private CameraControl _cameraControl;
 
     [SerializeField] private Rigidbody _rb;
@@ -62,6 +65,16 @@ public class PlayerControl : MonoBehaviour
         {
             _playerUI.SetUI();
             _playerCollider.CheckCollider();
+
+            if(GameManager.Instance.NowGear==GameManager.Gear.Gear5)
+            {
+                if(!_window.gameObject.activeSelf)
+                {
+                    _window.gameObject.SetActive(true);
+                    _window.Play();
+                }
+            }
+
         }
     }
 

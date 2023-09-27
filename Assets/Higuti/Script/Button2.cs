@@ -55,7 +55,7 @@ public class Button2 : MonoBehaviour
             yield return null;
         }
         canvas.enabled = false;
-        SceneManager.LoadScene("InGameTest");
+        SceneManager.LoadScene("Game");
     }
 
 }

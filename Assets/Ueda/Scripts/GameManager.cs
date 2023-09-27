@@ -56,6 +56,9 @@ public class GameManager : MonoBehaviour
     {
         _currentTime = _timeLimit;
         StartCoroutine(CountDown(_countDownTime , () => GameStart()));
+        AudioManager.Instance.PlayBGM(AudioManager.BGMType.LowSpeedBGM);
+       // AudioManager.Instance.PlaySE(AudioManager.SEType.LowEngine);
+       AudioManager.Instance.PlaySE(AudioManager.SEType.Start);
     }
     IEnumerator CountDown(float time ,Action callback)
     {
@@ -83,6 +86,7 @@ public class GameManager : MonoBehaviour
         _isActive = true;
         StartEvent?.Invoke();
         GearChange(_nowGear);
+
     }
     void Update()
     {
@@ -136,6 +140,12 @@ public class GameManager : MonoBehaviour
     {
         if(_nowGear != gear)
         {
+            if(gear == Gear.Gear4)
+            {
+                AudioManager.Instance.PlayBGM(AudioManager.BGMType.HighSpeedBGM);
+             //   AudioManager.Instance.PlaySE(AudioManager.SEType.HighEngine);
+            }
+
             GearChange(gear);
         }
     }
@@ -159,6 +169,7 @@ public class GameManager : MonoBehaviour
     {
         _isActive = false;
         EndEvent?.Invoke();
+        AudioManager.Instance.PlaySE(AudioManager.SEType.Goal);
     }
     public void ToResultScene()
     {

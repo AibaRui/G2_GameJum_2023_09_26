@@ -7,6 +7,7 @@ public class DashPanel : MonoBehaviour, IDamageble
 
     public void Hit()
     {
+        AudioManager.Instance.PlaySE(AudioManager.SEType.BoostPanel);
         GameManager.Instance.AddSpeed(_addSpeed);
     }
 

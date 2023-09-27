@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 155606a4397cea546b6d428185a7e1f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _score: 0
+  _score: 200
   _breakEffect: {fileID: 8490389018622049636, guid: 34327df8c0be4cf40b7ee144c107c00a, type: 3}
   _waitTime: 2
   _spriteRenderer: {fileID: 1534340770189743612}
