@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         _isActive = false;
+        SaveScore.ScoreSave(CurrentScore);
         EndEvent?.Invoke();
         AudioManager.Instance.PlaySE(AudioManager.SEType.Goal);
     }

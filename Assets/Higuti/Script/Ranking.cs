@@ -15,7 +15,7 @@ public class Ranking : MonoBehaviour
     [SerializeField]Text[] rankingText = new Text[5];
     void Awake()
     {
-        int currentScore = _gm.CurrentScore;
+        int currentScore = SaveScore.ResultScore;
         Getranking();
         Setranking(currentScore);
         for (int i = 0; i < rankingText.Length; i++)
