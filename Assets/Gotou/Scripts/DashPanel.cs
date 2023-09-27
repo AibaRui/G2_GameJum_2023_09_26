@@ -9,4 +9,9 @@ public class DashPanel : MonoBehaviour, IDamageble
     {
         GameManager.Instance.AddSpeed(_addSpeed);
     }
+
+    void IDamageble.UIShow(ScoreShow scoreShow)
+    {
+        //throw new System.NotImplementedException();
+    }
 }

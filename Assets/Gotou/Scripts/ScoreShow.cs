@@ -1,18 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreShow : MonoBehaviour
+public class ScoreShow : MonoBehaviour, IDamageble
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    void IDamageble.Hit()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    void IDamageble.UIShow(ScoreShow scoreShow)
+    {
+        throw new System.NotImplementedException();
     }
 }

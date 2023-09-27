@@ -36,4 +36,9 @@ public class ObstacleManager : MonoBehaviour, IDamageble
             particle.Play();
         }
     }
+
+    void IDamageble.UIShow(ScoreShow scoreShow)
+    {
+        //throw new System.NotImplementedException();
+    }
 }

@@ -20,4 +20,9 @@ public class DecorationManager : MonoBehaviour, IDamageble
             Destroy(this.gameObject, _waitTime);
         }
     }
+
+    void IDamageble.UIShow(ScoreShow scoreShow)
+    {
+        //throw new System.NotImplementedException();
+    }
 }
