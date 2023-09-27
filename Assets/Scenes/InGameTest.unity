@@ -884,45 +884,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2106020356}
     - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _timeLimit
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _speedUpRate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
       propertyPath: _countDownText
       value: 
       objectReference: {fileID: 833881097}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _countDownTime
-      value: 3.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _countDownImage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _countDownSprite.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _countDownSprite.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 6144e3da0649cce42bd37daadbb3a050, type: 3}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _countDownSprite.Array.data[1]
-      value: 
-      objectReference: {fileID: 21300000, guid: dc44a646ecc3bdf45824f275594ed11f, type: 3}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _countDownSprite.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: c2fe38c5bb66d074bb37c17eea8eea42, type: 3}
-    - target: {fileID: 5464324621243175320, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
-      propertyPath: _countDownSprite.Array.data[3]
-      value: 
-      objectReference: {fileID: 21300000, guid: daa4fcfda354632469e31082a3350dee, type: 3}
     - target: {fileID: 5464324621243175321, guid: 12890628f247ea441b8b42308e65dd30, type: 3}
       propertyPath: m_RootOrder
       value: 2

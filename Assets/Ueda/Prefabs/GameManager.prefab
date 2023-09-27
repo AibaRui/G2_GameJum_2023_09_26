@@ -44,6 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8957357f26d0db43add0f09ecee95bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeLimit: 60
-  _countDownTime: 3
-  _speedUpRate: 1
+  _UIcomp: {fileID: 0}
+  _UIduration: 0.2
+  _countDownText: {fileID: 0}
+  _timeLimit: 120
+  _countDownTime: 3.4
+  _speedUpRate: 10
+  _gearChangeRate: 0.95
+  _gearCollection:
+  - 30
+  - 60
+  - 90
+  - 120
+  - 150
+  - 300
+  StartEvent:
+    m_PersistentCalls:
+      m_Calls: []

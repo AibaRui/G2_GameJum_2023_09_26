@@ -23,12 +23,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _timeLimit = 60.0f;
     [SerializeField] float _countDownTime = 3.0f;
     [SerializeField] float _speedUpRate = 1.0f;
+    [SerializeField] float _gearChangeRate = 0.95f;
+    [SerializeField] float[] _gearCollection ;
     public static Dictionary<Gear, float> GearSpeed = new () {
         {Gear.Gear0 ,30.0f} ,{Gear.Gear1 ,100.0f} ,{Gear.Gear2 ,400.0f} ,{Gear.Gear3 ,700.0f} ,{Gear.Gear4 ,1200.0f}, {Gear.Gear5 ,3000.0f}};
     bool _isActive = false;
     int _currentScore = 0;
     float _currentTime = 0.0f;
-    float _currentSpeed = 0.0f;
+    float _currentSpeed = 5.0f;
     static GameManager instance;
     Gear _nowGear = Gear.Gear0;
     public static GameManager Instance => instance;
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour
     public float CurrentSpeed => _currentSpeed;
     public Gear NowGear => _nowGear;
     public UnityEvent StartEvent;
+    public UnityEvent EndEvent;
     private void Awake()
     {
         if (instance == null)
@@ -84,9 +87,10 @@ public class GameManager : MonoBehaviour
         if(_isActive)
         {
             _currentTime -= Time.deltaTime;
-            _currentSpeed += Time.deltaTime * _speedUpRate;
-            //print($"CurrentSpeed :{CurrentSpeed}");
-            //print($"CurrentScore :{CurrentScore}");
+            //_currentSpeed += Time.deltaTime * _speedUpRate;
+            _currentSpeed += ((GearSpeed[_nowGear] - _currentSpeed) / _gearCollection[(int)_nowGear]) * _speedUpRate * Time.deltaTime ;
+            print($"CurrentSpeed :{CurrentSpeed}");
+            print($"_gearCollection :{_gearCollection[(int)_nowGear]}");
             //print($"CurrentTime :{CurrentTime}");
             GearObserve(_currentSpeed);
             _UIcomp.TimeText(_currentTime);
@@ -98,29 +102,37 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+    void SpeedComposer()
+    {
+        float _nowSpeed = 10.0f;
+        float _targetSpeed = 200.0f;
+        float _speedRate = 1.0f;
+        float _acc = (_targetSpeed / _nowSpeed) * _speedRate;
+        _nowSpeed += _acc * Time.deltaTime;
+    }
     void GearObserve(float speed)
     {
-        if(speed < GearSpeed[Gear.Gear0])
+        if(speed < GearSpeed[Gear.Gear0] * _gearChangeRate)
         {
             GearUpdate(Gear.Gear0);
         }
-        else if(speed < GearSpeed[Gear.Gear1])
+        else if(speed < GearSpeed[Gear.Gear1] * _gearChangeRate)
         {
             GearUpdate(Gear.Gear1);
         }
-        else if(speed < GearSpeed[Gear.Gear2])
+        else if(speed < GearSpeed[Gear.Gear2] * _gearChangeRate)
         {
             GearUpdate(Gear.Gear2);
         }
-        else if(speed < GearSpeed[Gear.Gear3])
+        else if(speed < GearSpeed[Gear.Gear3] * _gearChangeRate)
         {
             GearUpdate(Gear.Gear3);
         }
-        else if (speed < GearSpeed[Gear.Gear4])
+        else if (speed < GearSpeed[Gear.Gear4] * _gearChangeRate)
         {
             GearUpdate(Gear.Gear4);
         }
-        else if(GearSpeed[Gear.Gear4] < speed)
+        else if(GearSpeed[Gear.Gear4] * _gearChangeRate < speed)
         { 
             GearUpdate(Gear.Gear5);
         }
@@ -136,6 +148,10 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         _isActive = false;
+        EndEvent?.Invoke();
+    }
+    public void ToResultScene()
+    {
         SceneController.Instance?.FadeAndNextScene("result");
     }
     public void AddScore(int score)
