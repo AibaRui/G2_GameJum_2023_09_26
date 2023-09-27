@@ -149,9 +149,11 @@ public class GameManager : MonoBehaviour
         {
             _UIcomp.SliderValue(GearSpeed[_nowGear], GearSpeed[gear]);
         }
-        
+       
         _nowGear = gear;
-        print(_nowGear);
+        print((int)_nowGear);
+        _UIcomp.gameObject.GetComponentInChildren<SpeedUISwicher>().ChangeSprite((int)_nowGear);
+       
     }
     void GameOver()
     {
