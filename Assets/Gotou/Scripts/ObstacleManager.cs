@@ -5,25 +5,27 @@ public class ObstacleManager : MonoBehaviour, IDamageble
     [SerializeField] int _score = 0;
     [SerializeField] float _addSpeed = 1.0f;
     [SerializeField] float _decreaseSpeed = -1.0f;
-    [SerializeField] ParticleSystem _particle = null;
+    [SerializeField] ParticleSystem _breakEffect = null;
+    [SerializeField] ParticleSystem _smokeEffect = null;
     [SerializeField] float _waitTime = 0;
     [SerializeField] SpriteRenderer _spriteRenderer = null;
     [SerializeField] Transform _spriteTransform = null;
 
     public void Hit()
     {
-        if (GameManager.Instance.NowGear == GameManager.Gear.Gear4)
+        if (GameManager.Instance.NowGear == GameManager.Gear.Gear4 || GameManager.Instance.NowGear == GameManager.Gear.Gear5)
         {
             GameManager.Instance.AddSpeed(_addSpeed);
             GameManager.Instance.AddScore(_score);
             _spriteRenderer.color = new Color(0, 0, 0, 0);
-            ParticleSystem particle = Instantiate(_particle, _spriteTransform.transform.position, _spriteTransform.transform.rotation);
+            ParticleSystem particle = Instantiate(_breakEffect, _spriteTransform.transform.position, _spriteTransform.transform.rotation);
             particle.Play();
             Destroy(this.gameObject, _waitTime);
         }
         else
         {
             GameManager.Instance.AddSpeed(_decreaseSpeed);
+            ParticleSystem particle = Instantiate(_smokeEffect, _spriteTransform.transform.position, _spriteTransform.transform.rotation);
         }
     }
 }

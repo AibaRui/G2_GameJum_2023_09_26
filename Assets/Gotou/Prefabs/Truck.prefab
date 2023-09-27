@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 0.24
       objectReference: {fileID: 0}
+    - target: {fileID: 1862141773, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
+      propertyPath: _breakEffect
+      value: 
+      objectReference: {fileID: 5386234267829758934, guid: b6ac17e9c35d7a846940004a9ce379e8, type: 3}
     - target: {fileID: 921951687244511027, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.19
