@@ -31,6 +31,8 @@ public class CameraControl : MonoBehaviour
 
     private float _setDutch = 0;
 
+    private bool _isEndGame = false;
+
     private CinemachineTransposer _cinemachineTransposer;
 
     private void Awake()
@@ -42,8 +44,21 @@ public class CameraControl : MonoBehaviour
     {
         float h = Input.GetAxisRaw("Horizontal");
 
-        SetFOV();
-        ChangeDutch(h);
+        if (!_isEndGame)
+        {
+            SetFOV();
+            ChangeDutch(h);
+        }
+        else
+        {
+            ChangeDutch(0);
+        }
+
+    }
+
+    public void EndGame()
+    {
+        _isEndGame = true;
     }
 
     public void Shake()
