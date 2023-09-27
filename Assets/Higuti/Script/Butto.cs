@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadScene : MonoBehaviour
+public class Butto : MonoBehaviour
 {
     [SerializeField] public Image fadeImage;
     public float fadeDuration = 2.0f;
