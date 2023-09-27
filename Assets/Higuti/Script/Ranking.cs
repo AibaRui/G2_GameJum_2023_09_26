@@ -16,7 +16,6 @@ public class Ranking : MonoBehaviour
     void Awake()
     {
         int currentScore = _gm.CurrentScore;
-        currentScore = 600;
         Getranking();
         Setranking(currentScore);
         for (int i = 0; i < rankingText.Length; i++)

@@ -26,9 +26,9 @@ public class UI : MonoBehaviour
         timerText.text = timer.ToString("00.00");
     }
 
-    public void ScoreText(int score)
+    public void ScoreText(float score)
     {
-        scoreText.text = score.ToString("0000");
+        scoreText.text = score.ToString("0000.00");
     }
     public static int score;
     public void SpeedText(float speed)
