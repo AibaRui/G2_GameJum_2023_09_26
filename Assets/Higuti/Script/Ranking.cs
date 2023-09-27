@@ -20,7 +20,7 @@ public class Ranking : MonoBehaviour
         Setranking(currentScore);
         for (int i = 0; i < rankingText.Length; i++)
         {
-            rankingText[i].text = rankingValue[i].ToString();
+            rankingText[i].text = rankingValue[i].ToString("f2");
         }
         if(Delete) PlayerPrefs.DeleteAll();
     }
