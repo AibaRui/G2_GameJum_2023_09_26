@@ -16,6 +16,11 @@ public class UI : MonoBehaviour
     {
         Speedslider.value = slide;
     }
+    public void SliderValue(float Min , float Max)
+    {
+        Speedslider.minValue = Min;
+        Speedslider.maxValue = Max;
+    }
     public void TimeText(float timer)
     {
         timerText.text = timer.ToString("00.00");
@@ -25,11 +30,11 @@ public class UI : MonoBehaviour
     {
         scoreText.text = score.ToString("0000");
     }
+    public static int score;
     public void SpeedText(float speed)
     {
         speedText.text = speed.ToString("0000");
     }
-
     public int DrawValue => _drawValue;
     public void Play(int initialValue, int endValue, float duration)
     {
