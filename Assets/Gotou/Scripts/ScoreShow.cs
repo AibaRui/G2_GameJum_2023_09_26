@@ -1,4 +1,5 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class ScoreShow : MonoBehaviour, IDamageble
 {
@@ -14,11 +15,11 @@ public class ScoreShow : MonoBehaviour, IDamageble
 
     void IDamageble.Hit()
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     void IDamageble.UIShow(ScoreShow scoreShow)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

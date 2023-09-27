@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8268566350185018233
+--- !u!1001 &2611994859869040516
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,34 +10,18 @@ PrefabInstance:
     - target: {fileID: 1534340770189743612, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b5354e65901cf714aae2690d30ab5ce8, type: 3}
-    - target: {fileID: 1534340770189743613, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.76
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: 82aa655a0bc50c04984b2edd1fd9fd69, type: 3}
     - target: {fileID: 1534340770189743615, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
       propertyPath: m_Name
-      value: TreeSpritre
-      objectReference: {fileID: 0}
-    - target: {fileID: 1534340770386937810, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
-      propertyPath: m_Size.x
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1534340770386937810, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
-      propertyPath: m_Size.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1534340770386937810, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
-      propertyPath: m_Center.y
-      value: 0.8
+      value: LoadedTiresSpritre
       objectReference: {fileID: 0}
     - target: {fileID: 1534340770386937811, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
       propertyPath: _breakEffect
       value: 
-      objectReference: {fileID: 2928524167759801307, guid: b7d1b6a419761674ca3bbff8b14dbe89, type: 3}
+      objectReference: {fileID: 6069660462994109741, guid: a87c3f3a7de968d44b7634066b7141ed, type: 3}
     - target: {fileID: 1534340770386937812, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
       propertyPath: m_Name
-      value: Tree
+      value: LoadedTires
       objectReference: {fileID: 0}
     - target: {fileID: 1534340770386937813, guid: 015bd4b1449633f44b86147a7e015011, type: 3}
       propertyPath: m_RootOrder
