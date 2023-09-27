@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.Events;
+using static GameManager;
 
 public class GameManager : MonoBehaviour
 {
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
     {
         _isActive = true;
         StartEvent?.Invoke();
+        GearChange(_nowGear);
     }
     void Update()
     {
@@ -89,8 +91,8 @@ public class GameManager : MonoBehaviour
             _currentTime -= Time.deltaTime;
             //_currentSpeed += Time.deltaTime * _speedUpRate;
             _currentSpeed += ((GearSpeed[_nowGear] - _currentSpeed) / _gearCollection[(int)_nowGear]) * _speedUpRate * Time.deltaTime ;
-            print($"CurrentSpeed :{CurrentSpeed}");
-            print($"_gearCollection :{_gearCollection[(int)_nowGear]}");
+            //print($"CurrentSpeed :{CurrentSpeed}");
+            //print($"_gearCollection :{_gearCollection[(int)_nowGear]}");
             //print($"CurrentTime :{CurrentTime}");
             GearObserve(_currentSpeed);
             _UIcomp.TimeText(_currentTime);
@@ -102,14 +104,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    void SpeedComposer()
-    {
-        float _nowSpeed = 10.0f;
-        float _targetSpeed = 200.0f;
-        float _speedRate = 1.0f;
-        float _acc = (_targetSpeed / _nowSpeed) * _speedRate;
-        _nowSpeed += _acc * Time.deltaTime;
-    }
+
     void GearObserve(float speed)
     {
         if(speed < GearSpeed[Gear.Gear0] * _gearChangeRate)
@@ -141,9 +136,22 @@ public class GameManager : MonoBehaviour
     {
         if(_nowGear != gear)
         {
-            _nowGear = gear;
-            print(_nowGear);
+            GearChange(gear);
         }
+    }
+    void GearChange(Gear gear)
+    {
+        if(gear == Gear.Gear0)
+        {
+            _UIcomp.SliderValue(0, GearSpeed[gear]);
+        }
+        else
+        {
+            _UIcomp.SliderValue(GearSpeed[_nowGear], GearSpeed[gear]);
+        }
+        
+        _nowGear = gear;
+        print(_nowGear);
     }
     void GameOver()
     {
