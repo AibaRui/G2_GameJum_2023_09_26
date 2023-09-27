@@ -81,6 +81,9 @@ public class MapControl : MonoBehaviour
             case GameManager.Gear.Gear4:
                 _moveSpeed = _speeds[4];
                 break;
+            case GameManager.Gear.Gear5:
+                _moveSpeed = _speeds[5];
+                break;
         }
     }
 

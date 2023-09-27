@@ -7,8 +7,6 @@ public class MapObstacleSet : MonoBehaviour
     [Header("障害物を置く位置")]
     [SerializeField] private List<Transform> _obstaclePos = new List<Transform>();
 
-
-
     [Header("マップの端")]
     [SerializeField] private float _side = 4;
 
@@ -48,6 +46,10 @@ public class MapObstacleSet : MonoBehaviour
             case GameManager.Gear.Gear4:
                 setNum = 8;
                 break;
+            case GameManager.Gear.Gear5:
+                setNum = 8;
+
+                break;
         }
 
         for (int i = 0; i < setNum; i++)
@@ -57,7 +59,7 @@ public class MapObstacleSet : MonoBehaviour
             if (r > _dashP)
             {
                 int objR = Random.Range(0, _obstacles.Count);
-
+                Debug.Log("Spown"+i);
                 var go = Instantiate(_obstacles[objR]);
                 go.transform.SetParent(_obstaclePos[i]);
                 int randamX = (int)Random.Range(-_side, _side);

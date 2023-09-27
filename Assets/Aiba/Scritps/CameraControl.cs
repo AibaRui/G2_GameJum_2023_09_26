@@ -24,6 +24,9 @@ public class CameraControl : MonoBehaviour
     [Header("ƒJƒƒ‰‚Ì—h‚ç‚·—Í")]
     [SerializeField] private float _shakePower = 0.3f;
 
+    [Header("ƒJƒƒ‰‚Ì—h‚ç‚·—Í_Gear5‚Ì")]
+    [SerializeField] private float _shakePowerGear5 = 0.3f;
+
     [SerializeField] private CinemachineImpulseSource Source;
 
     private float _setDutch = 0;
@@ -47,7 +50,18 @@ public class CameraControl : MonoBehaviour
     {
         Source.m_ImpulseDefinition.m_TimeEnvelope.m_AttackTime = 0.2f;
         Source.m_ImpulseDefinition.m_TimeEnvelope.m_DecayTime = 0.2f;
-        Source.GenerateImpulse(new Vector3(0, _shakePower, 0));
+
+        float setPower = 0;
+
+        if (GameManager.Instance.NowGear != GameManager.Gear.Gear5)
+        {
+            setPower = _shakePowerGear5;
+        }
+        else
+        {
+            setPower = _shakePower;
+        }
+        Source.GenerateImpulse(new Vector3(0, setPower, 0));
     }
 
 

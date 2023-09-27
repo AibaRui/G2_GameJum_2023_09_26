@@ -11,11 +11,6 @@ public class ObstacleManager : MonoBehaviour, IDamageble
     [SerializeField] SpriteRenderer _spriteRenderer = null;
     [SerializeField] Transform _spriteTransform = null;
 
-    private void Start()
-    {
-        Hit();
-    }
-
     public void Hit()
     {
         // NowGearが4以上の時のみ破壊できる
@@ -28,7 +23,7 @@ public class ObstacleManager : MonoBehaviour, IDamageble
             // 破壊時に透明にする
             _spriteRenderer.color = new Color(0, 0, 0, 0);
             // エフェクトの生成、再生
-            ParticleSystem particle = Instantiate(_breakEffect, _spriteTransform.transform.position, _spriteTransform.transform.rotation);
+            ParticleSystem particle = Instantiate(_breakEffect, _spriteTransform.transform.position, _breakEffect.transform.rotation);
             particle.Play();
             Destroy(this.gameObject, _waitTime);
         }
@@ -37,8 +32,13 @@ public class ObstacleManager : MonoBehaviour, IDamageble
             // 減速処理
             GameManager.Instance.AddSpeed(_decreaseSpeed);
             // 煙の生成、再生
-            ParticleSystem particle = Instantiate(_smokeEffect, _spriteTransform.transform.position, _spriteTransform.transform.rotation);
+            ParticleSystem particle = Instantiate(_smokeEffect, _spriteTransform.transform.position, _smokeEffect.transform.rotation);
             particle.Play();
         }
+    }
+
+    void IDamageble.UIShow(ScoreShow scoreShow)
+    {
+        //throw new System.NotImplementedException();
     }
 }

@@ -15,9 +15,14 @@ public class DecorationManager : MonoBehaviour, IDamageble
         {
             GameManager.Instance.AddScore(_score);
             _spriteRenderer.color = new Color(0, 0, 0, 0);
-            ParticleSystem particle = Instantiate(_breakEffect, _spriteTransform.transform.position, _spriteTransform.transform.rotation);
+            ParticleSystem particle = Instantiate(_breakEffect, _spriteTransform.transform.position, _breakEffect.transform.rotation);
             particle.Play();
             Destroy(this.gameObject, _waitTime);
         }
+    }
+
+    void IDamageble.UIShow(ScoreShow scoreShow)
+    {
+        //throw new System.NotImplementedException();
     }
 }
