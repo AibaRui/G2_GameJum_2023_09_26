@@ -73,6 +73,7 @@ public class MapObstacleSet : MonoBehaviour
                 int randamX = (int)Random.Range(-_side, _side);
                 go.transform.SetParent(_obstaclePos[i]);
                 go.transform.localPosition = Vector3.zero + new Vector3(randamX, 0, 0);
+                go.transform.GetChild(0).transform.localRotation = Quaternion.Euler(new Vector3(75,0,0));
                 _isDash = true;
             }
         }
