@@ -133,7 +133,8 @@ MonoBehaviour:
   _score: 0
   _addSpeed: 1
   _decreaseSpeed: -1
-  _particle: {fileID: 5099040430362675431, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
+  _breakEffect: {fileID: 5099040430362675431, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
+  _smokeEffect: {fileID: 3177108582159194445, guid: bc7f08b7180a44b41838dc3f4e3f93d2, type: 3}
   _waitTime: 2
   _spriteRenderer: {fileID: 1404182249865875313}
   _spriteTransform: {fileID: 921951687244511027}

@@ -8,6 +8,7 @@ public class MapObstacleSet : MonoBehaviour
     [SerializeField] private List<Transform> _obstaclePos = new List<Transform>();
 
 
+
     [Header("マップの端")]
     [SerializeField] private float _side = 4;
 
@@ -29,29 +30,47 @@ public class MapObstacleSet : MonoBehaviour
 
     private void Setting(Transform parent)
     {
-        foreach(var pos in _obstaclePos)
+        int setNum = 0;
+        switch (GameManager.Instance.NowGear)
         {
+            case GameManager.Gear.Gear0:
+                setNum = 3;
+                break;
+            case GameManager.Gear.Gear1:
+                setNum = 3;
+                break;
+            case GameManager.Gear.Gear2:
+                setNum = 2;
+                break;
+            case GameManager.Gear.Gear3:
+                setNum = 2;
+                break;
+            case GameManager.Gear.Gear4:
+                setNum = 8;
+                break;
+        }
 
+        for (int i = 0; i < setNum; i++)
+        {
             int r = Random.Range(0, 100);
 
-            if(r>_dashP)
+            if (r > _dashP)
             {
                 int objR = Random.Range(0, _obstacles.Count);
 
                 var go = Instantiate(_obstacles[objR]);
-                go.transform.SetParent(pos);
-                go.transform.localPosition = Vector3.zero;
+                go.transform.SetParent(_obstaclePos[i]);
+                int randamX = (int)Random.Range(-_side, _side);
+                go.transform.localPosition = Vector3.zero + new Vector3(randamX, 0, 0);
             }
             else
             {
                 if (_isDash) return;
 
                 var go = Instantiate(_dashPanel);
-                float randamX = Random.Range(-_side, _side);
-                Vector3 setPos = pos.position + new Vector3(randamX, 0, 0);
-
-                go.transform.SetParent(pos);
-                go.transform.localPosition = Vector3.zero;
+                int randamX = (int)Random.Range(-_side, _side);
+                go.transform.SetParent(_obstaclePos[i]);
+                go.transform.localPosition = Vector3.zero + new Vector3(randamX, 0, 0);
                 _isDash = true;
             }
         }
