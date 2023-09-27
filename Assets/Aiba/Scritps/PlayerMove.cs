@@ -14,32 +14,71 @@ public class PlayerMove
     [Header("Œ´‘¥“x")]
     [SerializeField] private float _slowSpeed;
 
+    [Header("Å‘åŠp“x")]
+    [SerializeField] private Vector3 _maxRotate = new Vector3(0, 0, 20);
+
+    [SerializeField] private Transform _car;
+
+    [SerializeField] private float _rotateSpeed = 200;
+
     private PlayerControl _playerControl;
     public void Init(PlayerControl playerControl)
     {
         _playerControl = playerControl;
     }
 
+    public void Rotate(float h)
+    {
+        Vector3 defultR = _car.eulerAngles;
+        defultR.z = 0;
+        Quaternion setR = default;
+
+        if (h == 0)
+        {
+            setR = Quaternion.Euler(defultR);
+        }
+        else
+        {
+            if (h > 0)
+            {
+                setR = Quaternion.Euler(defultR + (-_maxRotate));
+            }
+            else
+            {
+                setR = Quaternion.Euler(defultR + _maxRotate);
+            }
+        }
+
+        float time = Time.deltaTime*_rotateSpeed;
+
+        _car.rotation = Quaternion.RotateTowards(_car.rotation, setR, time);
+    }
+
+
     public void Move(float h)
     {
         if (h != 0)
         {
-            _playerControl.Rigidbody.AddForce(Vector3.right*h*_addSpeed);
+            _playerControl.Rigidbody.AddForce(Vector3.right * h * _addSpeed);
 
-            if(_playerControl.Rigidbody.velocity.x> _maxSpeed)
+            if (_playerControl.Rigidbody.velocity.x > _maxSpeed)
             {
                 _playerControl.Rigidbody.velocity = new Vector3(_maxSpeed, 0, 0);
             }
-            else if(_playerControl.Rigidbody.velocity.x<-_maxSpeed)
+            else if (_playerControl.Rigidbody.velocity.x < -_maxSpeed)
             {
                 _playerControl.Rigidbody.velocity = new Vector3(-_maxSpeed, 0, 0);
             }
         }
         else
         {
-            if (_playerControl.Rigidbody.velocity.x == 0) return;
+            if (_playerControl.Rigidbody.velocity.x == 0)
+            {
+                _playerControl.Rigidbody.velocity = Vector3.zero;
+                return;
+            }
 
-                if (_playerControl.Rigidbody.velocity.x > 0)
+            if (_playerControl.Rigidbody.velocity.x > 0)
             {
                 _playerControl.Rigidbody.AddForce(Vector3.left * _slowSpeed);
 
