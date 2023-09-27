@@ -36,17 +36,19 @@ public class PlayerUI
             case GameManager.Gear.Gear4:
                 setNum = 4;
                 break;
+            case GameManager.Gear.Gear5:
+                setNum = 5;
+                break;
         }
 
         if(!_speedUI[setNum].activeSelf)
         {
-            _speedUI[setNum].SetActive(true);
-
-            if(setNum!=0)
+            foreach(var a in _speedUI)
             {
-                _speedUI[setNum-1].SetActive(false);
+                a.SetActive(false);
             }
 
+            _speedUI[setNum].SetActive(true);
         }
     }
 

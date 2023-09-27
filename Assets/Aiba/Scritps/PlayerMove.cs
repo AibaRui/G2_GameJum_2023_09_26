@@ -41,13 +41,13 @@ public class PlayerMove
 
         if (Mathf.Abs(_car.transform.position.x - endPos.x) < 0.1f)
         {
+            _playerControl.Rigidbody.velocity = Vector3.zero;
             return true;
         }
         else
         {
             return false;
         }
-
     }
 
     public void Rotate(float h)

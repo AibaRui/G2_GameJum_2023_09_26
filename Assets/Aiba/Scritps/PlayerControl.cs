@@ -34,6 +34,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private Animator _anim;
 
 
+    private bool _isPlay = false;
+    private bool _isMoveEnd = false;
 
 
     private bool _isEndGame = false;
@@ -73,28 +75,44 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            if (_playerMove.MoveEnd())
+            if (!_isMoveEnd)
             {
-                gameObject.SetActive(false);
-
-                if (GameManager.Instance.NowGear == GameManager.Gear.Gear5)
+                if (_playerMove.MoveEnd())
                 {
-                    _timeLineGear5.gameObject.SetActive(true);
-                    _timeLineGear5.Play();
+                    _isMoveEnd = true;
                 }
-                else if (GameManager.Instance.NowGear == GameManager.Gear.Gear5)
-                {
-                    _timeLineGear4.gameObject.SetActive(true);
-                    _timeLineGear4.Play();
-                }
-                else
-                {
-                    _timeLineGearOther.gameObject.SetActive(true);
-                    _timeLineGearOther.Play();
-                }
-
             }
+
+            if (!_isPlay && _isMoveEnd)
+            {
+                StartCoroutine(PlayTimeLine());
+            }
+
+
             _playerMove.Rotate(0);
+        }
+    }
+
+    IEnumerator PlayTimeLine()
+    {
+        _isPlay = true;
+        yield return new WaitForSeconds(4f);
+        gameObject.SetActive(false);
+
+        if (GameManager.Instance.NowGear == GameManager.Gear.Gear5)
+        {
+            _timeLineGear5.gameObject.SetActive(true);
+            _timeLineGear5.Play();
+        }
+        else if (GameManager.Instance.NowGear == GameManager.Gear.Gear5)
+        {
+            _timeLineGear4.gameObject.SetActive(true);
+            _timeLineGear4.Play();
+        }
+        else
+        {
+            _timeLineGearOther.gameObject.SetActive(true);
+            _timeLineGearOther.Play();
         }
     }
 
