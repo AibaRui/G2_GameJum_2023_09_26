@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 921951687244511027}
   - component: {fileID: 1404182249865875313}
   m_Layer: 0
-  m_Name: ObstcleSprite
+  m_Name: SafetyConeSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1862141773}
   - component: {fileID: 518819698}
   m_Layer: 0
-  m_Name: Obstacle
+  m_Name: SafetyCone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   _particle: {fileID: 5099040430362675431, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
   _waitTime: 2
   _spriteRenderer: {fileID: 1404182249865875313}
+  _spriteTransform: {fileID: 921951687244511027}
 --- !u!65 &518819698
 BoxCollider:
   m_ObjectHideFlags: 0

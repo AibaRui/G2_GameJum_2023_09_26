@@ -8,6 +8,7 @@ public class ObstacleManager : MonoBehaviour, IDamageble
     [SerializeField] ParticleSystem _particle = null;
     [SerializeField] float _waitTime = 0;
     [SerializeField] SpriteRenderer _spriteRenderer = null;
+    [SerializeField] Transform _spriteTransform = null;
 
     public void Hit()
     {
@@ -16,7 +17,7 @@ public class ObstacleManager : MonoBehaviour, IDamageble
             GameManager.Instance.AddSpeed(_addSpeed);
             GameManager.Instance.AddScore(_score);
             _spriteRenderer.color = new Color(0, 0, 0, 0);
-            ParticleSystem particle = Instantiate(_particle, this.transform.position, this.transform.rotation);
+            ParticleSystem particle = Instantiate(_particle, _spriteTransform.transform.position, _spriteTransform.transform.rotation);
             particle.Play();
             Destroy(this.gameObject, _waitTime);
         }
