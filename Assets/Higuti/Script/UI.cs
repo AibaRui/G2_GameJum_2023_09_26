@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
     [SerializeField] Text scoreText;
     [SerializeField] Text timerText;
     [SerializeField] Text speedText;
+    [SerializeField] Text millspeedText;
     [SerializeField] Slider Speedslider;
     private int _drawValue = 0;
 
@@ -33,8 +34,10 @@ public class UI : MonoBehaviour
     public static int score;
     public void SpeedText(float speed)
     {
-        speedText.text = speed.ToString("0000");
+        speedText.text = speed.ToString("0").Replace("1"," 1");
+        millspeedText.text = (speed % 1).ToString(".00");
     }
+
     public int DrawValue => _drawValue;
     public void Play(int initialValue, int endValue, float duration)
     {
