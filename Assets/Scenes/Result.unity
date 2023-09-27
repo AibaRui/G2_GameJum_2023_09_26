@@ -403,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdf5a5f99a7e10429801604acd5c8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   fadeImage: {fileID: 990795531}
   fadeDuration: 2
   button: {fileID: 786957442}
@@ -414,6 +415,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 709874879798941689, guid: 48c2392bf2e394744aecc9fea2e9b2cf, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4917934963568408445, guid: 48c2392bf2e394744aecc9fea2e9b2cf, type: 3}
       propertyPath: m_Name
       value: SceneManagementCanvas
@@ -909,6 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdf5a5f99a7e10429801604acd5c8d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1822192196}
   fadeImage: {fileID: 1555326686}
   fadeDuration: 2
   button: {fileID: 786957442}
@@ -2085,6 +2091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07a2efe27b7c200449e3777085a77a05, type: 3}
+--- !u!223 &1822192196 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 7429516756096040353, guid: 48c2392bf2e394744aecc9fea2e9b2cf, type: 3}
+  m_PrefabInstance: {fileID: 453256754}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1824733608
 GameObject:
   m_ObjectHideFlags: 0

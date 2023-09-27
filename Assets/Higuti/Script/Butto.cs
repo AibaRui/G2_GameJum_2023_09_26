@@ -7,12 +7,16 @@ using UnityEngine.UI;
 
 public class Butto : MonoBehaviour
 {
+    [SerializeField] Canvas canvas;
     [SerializeField] public Image fadeImage;
     public float fadeDuration = 2.0f;
     [SerializeField] Button button;
     [SerializeField] AudioSource _audio;
+    int count = 0;
     private void Start()
     {
+        count++;
+        if(count != 1)canvas.enabled = true;
         button.onClick.AddListener(OnButtonClick);
         //button2.onClick.AddListener(OnButtonClick2);
     }
@@ -36,7 +40,8 @@ public class Butto : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-
+        canvas.enabled = false;
+        
         SceneManager.LoadScene("Title");
     }
    //private IEnumerator ToGameScene()
