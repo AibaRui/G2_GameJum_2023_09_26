@@ -10,12 +10,19 @@ public class PlayerControl : MonoBehaviour
     [Header("ˆÚ“®Ý’è")]
     [SerializeField] private PlayerMove _playerMove;
 
+    [Header("UIÝ’è")]
+    [SerializeField] private PlayerUI _playerUI;
+
+    [SerializeField] private CameraControl _cameraControl;
+
     [SerializeField] private Rigidbody _rb;
 
+    [SerializeField] private Animator _anim;
 
+    public Animator Animator => _anim;
     public PlayerAnim PlayerAnim => _playerAnim;
     public PlayerMove PlayerMove => _playerMove;
-
+    public PlayerUI PlayerUI => _playerUI;
 
     public Rigidbody Rigidbody => _rb;
 
@@ -23,19 +30,20 @@ public class PlayerControl : MonoBehaviour
     {
         _playerAnim.Init(this);
         _playerMove.Init(this);
+        _playerUI.Init(this);
     }
 
 
     void Update()
     {
-        
+        _playerUI.SetUI();
     }
 
     private void FixedUpdate()
     {
-
         float h = Input.GetAxisRaw("Horizontal");
         _playerMove.Move(h);
+        _playerMove.Rotate(h);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,6 +53,8 @@ public class PlayerControl : MonoBehaviour
         if(hit!=null)
         {
             hit.Hit();
+            _cameraControl.Shake();
+            _playerAnim.HitAnim();
         }
     }
 
