@@ -1,29 +1,52 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
-public class NewBehaviourScript : MonoBehaviour
+public class Ranking : MonoBehaviour
 {
+    [SerializeField]bool Delete = false;
     UI _ui = new UI();
     GameManager _gm = new GameManager();
-    List<int> ranking;
-    int score_num;
-     
-    void Start()
+    string[] rank = { "1ˆÊ", "2ˆÊ", "3ˆÊ", "4ˆÊ", "5ˆÊ" };
+    int[] rankingValue = new int[5];
+    [SerializeField]Text[] rankingText = new Text[5];
+    void Awake()
     {
-        score_num = PlayerPrefs.GetInt("SCORE", 0); 
-        
+        int currentScore = _gm.CurrentScore;
+        currentScore = 600;
+        Getranking();
+        Setranking(currentScore);
+        for (int i = 0; i < rankingText.Length; i++)
+        {
+            rankingText[i].text = rankingValue[i].ToString();
+        }
+        if(Delete) PlayerPrefs.DeleteAll();
+    }
+    void Getranking()
+    {
+        for (int i = 0; i < rank.Length; i++)
+        {
+            rankingValue[i] = PlayerPrefs.GetInt(rank[i]);
+        }
     }
 
-    // Update is called once per frame
-    void  Update()
+    void Setranking(int value)
     {
-        
+        for (int i = 0; i < rank.Length; i++)
+        {
+            if (value > rankingValue[i])
+            {
+                var change = rankingValue[i];
+                rankingValue[i] = value;
+                value = change;
+            }
+        }
+        for (int i = 0; i < rank.Length; i++)
+        {
+            PlayerPrefs.SetInt(rank[i], rankingValue[i]);
+        }
     }
-
-    //public void Save(int Score)
-    //{
-    //    score_num = PlayerPrefs.SetInt("SCOER", Score, score_num);
-    //}
 }

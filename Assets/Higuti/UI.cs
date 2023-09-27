@@ -16,10 +16,10 @@ public class UI : MonoBehaviour
     {
         Speedslider.value = slide;
     }
-    public void SliderValue(float Max , float Min)
+    public void SliderValue(float Min , float Max)
     {
-        Speedslider.value = Max;
-        Speedslider.value = Min;
+        Speedslider.minValue = Min;
+        Speedslider.maxValue = Max;
     }
     public void TimeText(float timer)
     {
