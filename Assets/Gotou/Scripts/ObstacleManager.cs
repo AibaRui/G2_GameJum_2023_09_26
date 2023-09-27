@@ -11,11 +11,6 @@ public class ObstacleManager : MonoBehaviour, IDamageble
     [SerializeField] SpriteRenderer _spriteRenderer = null;
     [SerializeField] Transform _spriteTransform = null;
 
-    private void Start()
-    {
-        Hit();
-    }
-
     public void Hit()
     {
         // NowGear‚ª4ˆÈã‚Ì‚Ì‚İ”j‰ó‚Å‚«‚é
