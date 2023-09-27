@@ -11,21 +11,34 @@ public class ObstacleManager : MonoBehaviour, IDamageble
     [SerializeField] SpriteRenderer _spriteRenderer = null;
     [SerializeField] Transform _spriteTransform = null;
 
+    private void Start()
+    {
+        Hit();
+    }
+
     public void Hit()
     {
+        // NowGearが4以上の時のみ破壊できる
         if (GameManager.Instance.NowGear == GameManager.Gear.Gear4 || GameManager.Instance.NowGear == GameManager.Gear.Gear5)
         {
+            // スコアの加算
             GameManager.Instance.AddSpeed(_addSpeed);
+            // 加速処理
             GameManager.Instance.AddScore(_score);
+            // 破壊時に透明にする
             _spriteRenderer.color = new Color(0, 0, 0, 0);
+            // エフェクトの生成、再生
             ParticleSystem particle = Instantiate(_breakEffect, _spriteTransform.transform.position, _spriteTransform.transform.rotation);
             particle.Play();
             Destroy(this.gameObject, _waitTime);
         }
-        else
+        else   // それ以下の時は減速する
         {
+            // 減速処理
             GameManager.Instance.AddSpeed(_decreaseSpeed);
+            // 煙の生成、再生
             ParticleSystem particle = Instantiate(_smokeEffect, _spriteTransform.transform.position, _spriteTransform.transform.rotation);
+            particle.Play();
         }
     }
 }
