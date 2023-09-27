@@ -13,11 +13,19 @@ public class PlayerControl : MonoBehaviour
     [Header("UIÝ’è")]
     [SerializeField] private PlayerUI _playerUI;
 
+    [Header("“–‚½‚è”»’è‚ÌÝ’è")]
+    [SerializeField] private PlayerCollider _playerCollider;
+
     [SerializeField] private CameraControl _cameraControl;
 
     [SerializeField] private Rigidbody _rb;
 
     [SerializeField] private Animator _anim;
+
+
+
+
+    private bool _isEndGame = false;
 
     public Animator Animator => _anim;
     public PlayerAnim PlayerAnim => _playerAnim;
@@ -31,31 +39,51 @@ public class PlayerControl : MonoBehaviour
         _playerAnim.Init(this);
         _playerMove.Init(this);
         _playerUI.Init(this);
+        _playerCollider.Init(this);
     }
 
 
     void Update()
     {
-        _playerUI.SetUI();
+        if (!_isEndGame)
+        {
+            _playerUI.SetUI();
+            _playerCollider.CheckCollider();
+        }
     }
 
     private void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        _playerMove.Move(h);
-        _playerMove.Rotate(h);
+        if (!_isEndGame)
+        {
+            float h = Input.GetAxisRaw("Horizontal");
+            _playerMove.Move(h);
+            _playerMove.Rotate(h);
+        }
+        else
+        {
+            if (_playerMove.MoveEnd())
+            {
+                gameObject.SetActive(false);
+            }
+            _playerMove.Rotate(0);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.TryGetComponent<IDamageble>(out IDamageble hit);
-
-        if(hit!=null)
+        if (GameManager.Instance.NowGear != GameManager.Gear.Gear5)
         {
-            hit.Hit();
-            _cameraControl.Shake();
-            _playerAnim.HitAnim();
+            other.gameObject.TryGetComponent<IDamageble>(out IDamageble hit);
+
+            if (hit != null)
+            {
+                hit.Hit();
+            }
         }
+
+        _cameraControl.Shake();
+        _playerAnim.HitAnim();
     }
 
 

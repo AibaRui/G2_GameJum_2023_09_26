@@ -17,6 +17,12 @@ public class PlayerMove
     [Header("最大角度")]
     [SerializeField] private Vector3 _maxRotate = new Vector3(0, 0, 20);
 
+    [Header("中央のX座標")]
+    [SerializeField] private float _endX = 0;
+
+    [Header("終了時の移動速度")]
+    [SerializeField] private float _speedEnd = 200;
+
     [SerializeField] private Transform _car;
 
     [SerializeField] private float _rotateSpeed = 200;
@@ -25,6 +31,23 @@ public class PlayerMove
     public void Init(PlayerControl playerControl)
     {
         _playerControl = playerControl;
+    }
+
+    public bool MoveEnd()
+    {
+        Vector3 endPos = new Vector3(_endX, _car.transform.position.y, _car.transform.position.z);
+        Vector3 dir = endPos - _car.position;
+        _playerControl.Rigidbody.AddForce(dir.normalized * _speedEnd);
+
+        if (Mathf.Abs(_car.transform.position.x - endPos.x) < 0.1f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
     public void Rotate(float h)
@@ -49,7 +72,7 @@ public class PlayerMove
             }
         }
 
-        float time = Time.deltaTime*_rotateSpeed;
+        float time = Time.deltaTime * _rotateSpeed;
 
         _car.rotation = Quaternion.RotateTowards(_car.rotation, setR, time);
     }
