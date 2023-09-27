@@ -28,7 +28,7 @@ public class MapControl : MonoBehaviour
     [Header("Šm”F—p")]
     [SerializeField] private List<Rigidbody> _mapsRb = new List<Rigidbody>();
 
-
+    private bool _isEndGame = false;
 
     private Transform _goalPos;
 
@@ -46,11 +46,15 @@ public class MapControl : MonoBehaviour
         }
     }
 
+    public void EndGame()
+    {
+        _isEndGame = true;
+    }
     private void Update()
     {
         Check();
-        CheckDestroy();
         SetSpeed();
+        CheckDestroy();
     }
 
     private void FixedUpdate()
@@ -103,7 +107,7 @@ public class MapControl : MonoBehaviour
 
         float h = _maps[0].transform.position.z - _playerT.position.z;
 
-        if (h < -(_mapPrefab.transform.localScale.z / 2+2))
+        if (h < -(_mapPrefab.transform.localScale.z / 2 + 2))
         {
             var go = _maps[0];
             _maps.RemoveAt(0);
@@ -118,8 +122,11 @@ public class MapControl : MonoBehaviour
         var go = Instantiate(_mapPrefab);
         go.transform.position = pos;
 
-        go.GetComponent<MapObstacleSet>().Init(go.transform);
-        go.GetComponent<MapDecoration>().Init(go.transform);
+        if (!_isEndGame)
+        {
+            go.GetComponent<MapObstacleSet>().Init(go.transform);
+            go.GetComponent<MapDecoration>().Init(go.transform);
+        }
 
         _maps.Add(go);
         _mapsRb.Add(go.GetComponent<Rigidbody>());

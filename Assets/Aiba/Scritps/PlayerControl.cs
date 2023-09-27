@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables; //Timelineの制御に必要
+
 
 public class PlayerControl : MonoBehaviour
 {
@@ -15,6 +17,15 @@ public class PlayerControl : MonoBehaviour
 
     [Header("当たり判定の設定")]
     [SerializeField] private PlayerCollider _playerCollider;
+
+    [Header("終わりのTimeLine_Gear5")]
+    [SerializeField] private PlayableDirector _timeLineGear5;
+
+    [Header("終わりのTimeLine_Gear4")]
+    [SerializeField] private PlayableDirector _timeLineGear4;
+
+    [Header("終わりのTimeLine_Gearその他")]
+    [SerializeField] private PlayableDirector _timeLineGearOther;
 
     [SerializeField] private CameraControl _cameraControl;
 
@@ -65,10 +76,33 @@ public class PlayerControl : MonoBehaviour
             if (_playerMove.MoveEnd())
             {
                 gameObject.SetActive(false);
+
+                if (GameManager.Instance.NowGear == GameManager.Gear.Gear5)
+                {
+                    _timeLineGear5.gameObject.SetActive(true);
+                    _timeLineGear5.Play();
+                }
+                else if (GameManager.Instance.NowGear == GameManager.Gear.Gear5)
+                {
+                    _timeLineGear4.gameObject.SetActive(true);
+                    _timeLineGear4.Play();
+                }
+                else
+                {
+                    _timeLineGearOther.gameObject.SetActive(true);
+                    _timeLineGearOther.Play();
+                }
+
             }
             _playerMove.Rotate(0);
         }
     }
+
+    public void EndGame()
+    {
+        _isEndGame = true;
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
