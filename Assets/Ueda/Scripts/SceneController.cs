@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] float  _animationWait = 3.0f;
     [SerializeField] Image _fadeImage ;
     [SerializeField] float _fadeTime ;
     static SceneController instance;
@@ -34,4 +35,10 @@ public class SceneController : MonoBehaviour
         await _fadeImage.DOFade(0, _fadeTime).SetEase(Ease.InSine);
         _fadeImage.gameObject.SetActive(false);
     }
+    public async void WaitAnimationToInGame(string nextSnene)
+    {
+        await UniTask.WaitForSeconds(_animationWait);
+        FadeAndNextScene(nextSnene);
+    }
+
 }
