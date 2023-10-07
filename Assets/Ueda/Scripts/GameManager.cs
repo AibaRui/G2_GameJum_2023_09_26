@@ -5,10 +5,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.Events;
-using static GameManager;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    protected void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     public enum Gear
     {
         Gear0,
@@ -32,26 +43,13 @@ public class GameManager : MonoBehaviour
     int _currentScore = 0;
     float _currentTime = 0.0f;
     float _currentSpeed = 5.0f;
-    static GameManager instance;
     Gear _nowGear = Gear.Gear0;
-    public static GameManager Instance => instance;
     public int CurrentScore => _currentScore;
     public float CurrentTime => _currentTime;
     public float CurrentSpeed => _currentSpeed;
     public Gear NowGear => _nowGear;
     public UnityEvent StartEvent;
     public UnityEvent EndEvent;
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
     void Start()
     {
         _currentTime = _timeLimit;
@@ -86,18 +84,13 @@ public class GameManager : MonoBehaviour
         _isActive = true;
         StartEvent?.Invoke();
         GearChange(_nowGear);
-
     }
     void Update()
     {
         if(_isActive)
         {
             _currentTime -= Time.deltaTime;
-            //_currentSpeed += Time.deltaTime * _speedUpRate;
             _currentSpeed += ((GearSpeed[_nowGear] - _currentSpeed) / _gearCollection[(int)_nowGear]) * _speedUpRate * Time.deltaTime ;
-            //print($"CurrentSpeed :{CurrentSpeed}");
-            //print($"_gearCollection :{_gearCollection[(int)_nowGear]}");
-            //print($"CurrentTime :{CurrentTime}");
             GearObserve(_currentSpeed);
             _UIcomp.TimeText(_currentTime);
             _UIcomp.slider(_currentSpeed);
@@ -111,29 +104,13 @@ public class GameManager : MonoBehaviour
 
     void GearObserve(float speed)
     {
-        if(speed < GearSpeed[Gear.Gear0] * _gearChangeRate)
+        if (NowGear != Gear.Gear5 && GearSpeed[NowGear] * _gearChangeRate < speed)
         {
-            GearUpdate(Gear.Gear0);
+            GearUpdate(NowGear + 1);
         }
-        else if(speed < GearSpeed[Gear.Gear1] * _gearChangeRate)
+        else if (NowGear != Gear.Gear0 && speed < GearSpeed[NowGear - 1] * _gearChangeRate )
         {
-            GearUpdate(Gear.Gear1);
-        }
-        else if(speed < GearSpeed[Gear.Gear2] * _gearChangeRate)
-        {
-            GearUpdate(Gear.Gear2);
-        }
-        else if(speed < GearSpeed[Gear.Gear3] * _gearChangeRate)
-        {
-            GearUpdate(Gear.Gear3);
-        }
-        else if (speed < GearSpeed[Gear.Gear4] * _gearChangeRate)
-        {
-            GearUpdate(Gear.Gear4);
-        }
-        else if(GearSpeed[Gear.Gear4] * _gearChangeRate < speed)
-        { 
-            GearUpdate(Gear.Gear5);
+            GearUpdate(NowGear - 1);
         }
     }
     void GearUpdate(Gear gear)
@@ -143,9 +120,9 @@ public class GameManager : MonoBehaviour
             if(gear == Gear.Gear4)
             {
                 AudioManager.Instance.PlayBGM(AudioManager.BGMType.HighSpeedBGM);
-             //   AudioManager.Instance.PlaySE(AudioManager.SEType.HighEngine);
+                AudioManager.Instance.ChangeSEVolumeByRate(0.7f);
+                EndEvent.AddListener(AudioManager.Instance.SEVolumeToDefault);
             }
-
             GearChange(gear);
         }
     }
@@ -157,13 +134,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.PlaySE(AudioManager.EngineSEType.GearChange);
+            AudioManager.Instance.PlaySE((AudioManager.EngineSEType)gear + (int)AudioManager.EngineSEType.GearChange);
             _UIcomp.SliderValue(GearSpeed[_nowGear], GearSpeed[gear]);
         }
-       
         _nowGear = gear;
-        print((int)_nowGear);
-        _UIcomp.gameObject.GetComponentInChildren<SpeedUISwicher>().ChangeSprite((int)_nowGear);
-       
+               _UIcomp.gameObject.GetComponentInChildren<SpeedUISwicher>().ChangeSprite((int)_nowGear);
     }
     void GameOver()
     {
@@ -193,29 +169,4 @@ public class GameManager : MonoBehaviour
             _currentSpeed= 0;
         }
     }
-    //IEnumerator CountDown(float time, Action callback)
-    //{
-    //    float timer = time;
-    //    int iTime = -1;
-    //    //_timeText.color = Color.red;
-    //    //_scoreText.gameObject.transform.parent.gameObject.SetActive(true);
-    //    //_timeText.gameObject.transform.parent.gameObject.SetActive(true);
-    //    _countDownImage.gameObject.SetActive(true);
-    //    while (timer > 0f)
-    //    {
-    //        timer -= Time.deltaTime;
-    //        if (iTime != (int)(timer + 0.5f))
-    //        {
-    //            iTime = (int)(timer + 0.5f);
-    //            _countDownImage.sprite = _countDownSprite[iTime];
-    //            _countDownImage.SetNativeSize();
-    //            _countDownImage.transform.DOScale(2f, 0.3f).OnComplete(() => _countDownImage.transform.DOScale(1f, 0.3f));
-    //        }
-    //        yield return null;
-    //    }
-    //    _countDownImage.gameObject.SetActive(false);
-    //    callback();
-    //    //_startEvent?.Invoke();
-    //    //_nowGame = StartCoroutine(GameTimer());
-    //}
 }

@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 [System.Serializable]
 public class PlayerMove
 {
-    [Header("移動最高速度")]
-    [SerializeField] private float _maxSpeed = 3;
-
-    [Header("加速度")]
-    [SerializeField] private float _addSpeed;
-
-    [Header("原則度")]
-    [SerializeField] private float _slowSpeed;
+    [Header("各ギアのX速度")]
+    [SerializeField] private float[] _maxSpeeds = new float[6];
 
     [Header("最大角度")]
     [SerializeField] private Vector3 _maxRotate = new Vector3(0, 0, 20);
@@ -52,75 +47,13 @@ public class PlayerMove
 
     public void Rotate(float h)
     {
-        Vector3 defultR = _car.eulerAngles;
-        defultR.z = 0;
-        Quaternion setR = default;
-
-        if (h == 0)
-        {
-            setR = Quaternion.Euler(defultR);
-        }
-        else
-        {
-            if (h > 0)
-            {
-                setR = Quaternion.Euler(defultR + (-_maxRotate));
-            }
-            else
-            {
-                setR = Quaternion.Euler(defultR + _maxRotate);
-            }
-        }
-
-        float time = Time.deltaTime * _rotateSpeed;
-
-        _car.rotation = Quaternion.RotateTowards(_car.rotation, setR, time);
+        _car.rotation = Quaternion.Euler(_maxRotate * h);
     }
 
 
     public void Move(float h)
     {
-        if (h != 0)
-        {
-            _playerControl.Rigidbody.AddForce(Vector3.right * h * _addSpeed);
-
-            if (_playerControl.Rigidbody.velocity.x > _maxSpeed)
-            {
-                _playerControl.Rigidbody.velocity = new Vector3(_maxSpeed, 0, 0);
-            }
-            else if (_playerControl.Rigidbody.velocity.x < -_maxSpeed)
-            {
-                _playerControl.Rigidbody.velocity = new Vector3(-_maxSpeed, 0, 0);
-            }
-        }
-        else
-        {
-            if (_playerControl.Rigidbody.velocity.x == 0)
-            {
-                _playerControl.Rigidbody.velocity = Vector3.zero;
-                return;
-            }
-
-            if (_playerControl.Rigidbody.velocity.x > 0)
-            {
-                _playerControl.Rigidbody.AddForce(Vector3.left * _slowSpeed);
-
-                if (_playerControl.Rigidbody.velocity.x < 0)
-                {
-                    _playerControl.Rigidbody.velocity = Vector3.zero;
-                }
-
-            }
-            else if (_playerControl.Rigidbody.velocity.x < 0)
-            {
-                _playerControl.Rigidbody.AddForce(Vector3.right * _slowSpeed);
-
-                if (_playerControl.Rigidbody.velocity.x > 0)
-                {
-                    _playerControl.Rigidbody.velocity = Vector3.zero;
-                }
-            }
-        }   //減速処理
+        _playerControl.Rigidbody.velocity = Vector3.right * h * _maxSpeeds[(int)GameManager.Instance.NowGear];
     }
 
 }

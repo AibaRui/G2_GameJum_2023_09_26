@@ -68,27 +68,13 @@ public class MapControl : MonoBehaviour
 
     public void SetSpeed()
     {
-        switch (GameManager.Instance.NowGear)
+        var GM_ins = GameManager.Instance;
+        if (GM_ins)
         {
-            case GameManager.Gear.Gear0:
-                _moveSpeed = _speeds[0];
-                break;
-            case GameManager.Gear.Gear1:
-                _moveSpeed = _speeds[1];
-                break;
-            case GameManager.Gear.Gear2:
-                _moveSpeed = _speeds[2];
-                break;
-            case GameManager.Gear.Gear3:
-                _moveSpeed = _speeds[3];
-                break;
-            case GameManager.Gear.Gear4:
-                _moveSpeed = _speeds[4];
-                break;
-            case GameManager.Gear.Gear5:
-                _moveSpeed = _speeds[5];
-                break;
+            var speedRate = (GM_ins.NowGear != GameManager.Gear.Gear5) ?  (_speeds[(int)GM_ins.NowGear + 1] - _speeds[(int)GM_ins.NowGear]) * (GM_ins.CurrentSpeed / GameManager.GearSpeed[GM_ins.NowGear]) : 0 ;
+            _moveSpeed = _speeds[(int)GM_ins.NowGear] + speedRate;
         }
+
     }
 
     public void Check()

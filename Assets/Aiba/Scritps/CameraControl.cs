@@ -42,7 +42,7 @@ public class CameraControl : MonoBehaviour
 
     private void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
+        float h = Input.GetAxis("Horizontal");
 
         if (!_isEndGame)
         {
@@ -82,76 +82,17 @@ public class CameraControl : MonoBehaviour
 
     private void ChangeDutch(float h)
     {
-        if (h > 0)
-        {
-            if (_setDutch < _dutchMax)
-            {
-                _setDutch += _dutchChangeSpeed;
-                if (_setDutch > _dutchMax)
-                {
-                    _setDutch = _dutchMax;
-                }
-            }
-        }
-        else if (h < 0)
-        {
-            if (_setDutch > -_dutchMax)
-            {
-                _setDutch -= _dutchChangeSpeed;
-                if (_setDutch < -_dutchMax)
-                {
-                    _setDutch = -_dutchMax;
-                }
-            }
-        }
-        else
-        {
-            if (_setDutch > 0)
-            {
-                _setDutch -= _dutchChangeSpeed;
-                if (_setDutch < 0)
-                {
-                    _setDutch = 0;
-                }
-            }
-            else if (_setDutch < 0)
-            {
-                _setDutch += _dutchChangeSpeed;
-                if (_setDutch > 0)
-                {
-                    _setDutch = 0;
-                }
-            }
-        }
-        _camera.m_Lens.Dutch = _setDutch;
+        _camera.m_Lens.Dutch = _dutchMax * h;
     }
 
 
 
     public void SetFOV()
     {
-        switch (GameManager.Instance.NowGear)
-        {
-            case GameManager.Gear.Gear0:
-                _cinemachineTransposer.m_FollowOffset.z = _cameraDis[0];
-                _camera.m_Lens.FieldOfView = _cameraFOV[0];
-                break;
-            case GameManager.Gear.Gear1:
-                _cinemachineTransposer.m_FollowOffset.z = _cameraDis[1];
-                _camera.m_Lens.FieldOfView = _cameraFOV[1];
-                break;
-            case GameManager.Gear.Gear2:
-                _cinemachineTransposer.m_FollowOffset.z = _cameraDis[2];
-                _camera.m_Lens.FieldOfView = _cameraFOV[2];
-                break;
-            case GameManager.Gear.Gear3:
-                _cinemachineTransposer.m_FollowOffset.z = _cameraDis[3];
-                _camera.m_Lens.FieldOfView = _cameraFOV[3];
-                break;
-            case GameManager.Gear.Gear4:
-                _cinemachineTransposer.m_FollowOffset.z = _cameraDis[4];
-                _camera.m_Lens.FieldOfView = _cameraFOV[4];
-                break;
-        }
+        _cinemachineTransposer.m_FollowOffset.z = _cameraDis[(int)GameManager.Instance.NowGear];
+        var GM_ins = GameManager.Instance;
+        var speedRate = (GM_ins.NowGear != GameManager.Gear.Gear5) ? (_cameraFOV[(int)GM_ins.NowGear + 1] - _cameraFOV[(int)GM_ins.NowGear]) * (GM_ins.CurrentSpeed / GameManager.GearSpeed[GM_ins.NowGear]) : 0;
+        _camera.m_Lens.FieldOfView = _cameraFOV[(int)GM_ins.NowGear] + speedRate;
+
     }
 }

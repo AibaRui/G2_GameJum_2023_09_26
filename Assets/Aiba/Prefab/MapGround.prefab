@@ -920,7 +920,8 @@ MonoBehaviour:
   - {fileID: 982648510628065549, guid: 8616942fe15454048a3504bedb89ed3c, type: 3}
   - {fileID: 4829484314896952673, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
   _dashPanel: {fileID: 7661520830114230454, guid: b60d8fab23a16014bb8794bb6aaafde5, type: 3}
-  _dashP: 20
+  _makeDashPersent: 25
+  _setNums: 020000000200000003000000030000000300000005000000
 --- !u!114 &4262575274563181841
 MonoBehaviour:
   m_ObjectHideFlags: 0

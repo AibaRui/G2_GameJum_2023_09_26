@@ -8,25 +8,12 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour
+public class SceneController : SingletonBase<SceneController>
 {
     [SerializeField] float  _animationWait = 3.0f;
     [SerializeField] Image _fadeImage ;
     [SerializeField] float _fadeTime ;
-    static SceneController instance;
-    public static SceneController Instance =>instance;
-    void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    protected override void AwakeFunction() { }
     public async void FadeAndNextScene(string nextSnene)
     {
         _fadeImage.gameObject.SetActive(true);

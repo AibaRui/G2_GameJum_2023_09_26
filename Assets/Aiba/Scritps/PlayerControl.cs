@@ -58,7 +58,7 @@ public class PlayerControl : MonoBehaviour
         _playerCollider.Init(this);
     }
 
-
+    bool _maxSpeed = false;
     void Update()
     {
         if (!_isEndGame)
@@ -66,7 +66,7 @@ public class PlayerControl : MonoBehaviour
             _playerUI.SetUI();
             _playerCollider.CheckCollider();
 
-            if(GameManager.Instance.NowGear==GameManager.Gear.Gear5)
+            if(GameManager.Instance.NowGear==GameManager.Gear.Gear4)
             {
                 if(!_window.gameObject.activeSelf)
                 {
@@ -74,7 +74,14 @@ public class PlayerControl : MonoBehaviour
                     _window.Play();
                 }
             }
-
+            if (GameManager.Instance.NowGear == GameManager.Gear.Gear5)
+            {
+                if (_window.gameObject.activeSelf)
+                {
+                    var emission = _window.emission ;
+                    emission.rateOverTime = 25f;
+                }
+            }
         }
     }
 
@@ -82,7 +89,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (!_isEndGame)
         {
-            float h = Input.GetAxisRaw("Horizontal");
+            float h = Input.GetAxis("Horizontal");
             _playerMove.Move(h);
             _playerMove.Rotate(h);
         }
@@ -116,11 +123,13 @@ public class PlayerControl : MonoBehaviour
         {
             _timeLineGear5.gameObject.SetActive(true);
             _timeLineGear5.Play();
+            AudioManager.Instance.PlaySE(AudioManager.SEType.FlyAway);
         }
         else if (GameManager.Instance.NowGear == GameManager.Gear.Gear5)
         {
             _timeLineGear4.gameObject.SetActive(true);
             _timeLineGear4.Play();
+            AudioManager.Instance.PlaySE(AudioManager.SEType.FlyAway);
         }
         else
         {
@@ -137,16 +146,11 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance.NowGear != GameManager.Gear.Gear5)
+        other.gameObject.TryGetComponent<IDamageble>(out IDamageble hit);
+        if (hit != null)
         {
-            other.gameObject.TryGetComponent<IDamageble>(out IDamageble hit);
-
-            if (hit != null)
-            {
-                hit.Hit();
-            }
+            hit.Hit();
         }
-
         _cameraControl.Shake();
         _playerAnim.HitAnim();
     }

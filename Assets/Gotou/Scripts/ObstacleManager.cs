@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour, IDamageble
 {
+    [SerializeField] GameManager.Gear _breakGear;
     [SerializeField] int _score = 0;
     [SerializeField] float _addSpeed = 1.0f;
     [SerializeField] float _decreaseSpeed = -1.0f;
@@ -13,8 +14,7 @@ public class ObstacleManager : MonoBehaviour, IDamageble
 
     public void Hit()
     {
-        // NowGear‚ª4ˆÈã‚Ì‚Ì‚İ”j‰ó‚Å‚«‚é
-        if (GameManager.Instance.NowGear == GameManager.Gear.Gear4 || GameManager.Instance.NowGear == GameManager.Gear.Gear5)
+        if (GameManager.Instance.NowGear >= _breakGear)
         {
             AudioManager.Instance.PlaySE(AudioManager.SEType.Destruction);
             // ƒXƒRƒA‚Ì‰ÁZ

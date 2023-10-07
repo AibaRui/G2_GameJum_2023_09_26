@@ -27,21 +27,19 @@ public class UI : MonoBehaviour
         timerText.text = timer.ToString("00.00");
     }
 
-    public void ScoreText(float score)
+    public void ScoreText(int score)
     {
-        scoreText.text = score.ToString("0000.00");
+        scoreText.text = score.ToString("0000");
     }
-    public static int score;
     public void SpeedText(float speed)
     {
         speedText.text = speed.ToString("0").Replace("1"," 1");
-        millspeedText.text = (speed % 1).ToString(".00");
+        millspeedText.text = (speed % 1).ToString(".00").Replace("1", " 1");
     }
 
     public int DrawValue => _drawValue;
     public void Play(int initialValue, int endValue, float duration)
     {
-        Debug.Log("DD");
         _drawValue = initialValue;
         DOTween.To(
             () => _drawValue,

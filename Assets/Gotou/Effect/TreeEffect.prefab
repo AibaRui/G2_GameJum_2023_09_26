@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3223699067876350186
+--- !u!1001 &7955427835653874492
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -25,11 +25,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5099040430362675430, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.95881975
+      value: 0.8191521
       objectReference: {fileID: 0}
     - target: {fileID: 5099040430362675430, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.28401542
+      value: 0.5735764
       objectReference: {fileID: 0}
     - target: {fileID: 5099040430362675430, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
       propertyPath: m_LocalRotation.y
@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5099040430362675430, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -33
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5099040430362675430, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -53,15 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5099040430362675431, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 1.4
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5099040430362675432, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d60d7b82f0e654542a2427ceba405afc, type: 2}
+      objectReference: {fileID: 2100000, guid: bf6efcc7b17bd3b49be750620b84f90c, type: 2}
     - target: {fileID: 5099040430362675433, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}
       propertyPath: m_Name
-      value: BarricadeEffect
+      value: TreeEffect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 857b6fcb99b2bd74fb3bdbd1ef6ddc52, type: 3}

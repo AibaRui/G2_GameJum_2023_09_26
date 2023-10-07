@@ -8,8 +8,6 @@ using UnityEngine.UI;
 public class Ranking : MonoBehaviour
 {
     [SerializeField]bool Delete = false;
-    UI _ui = new UI();
-    GameManager _gm = new GameManager();
     string[] rank = { "1ˆÊ", "2ˆÊ", "3ˆÊ", "4ˆÊ", "5ˆÊ" };
     int[] rankingValue = new int[5];
     [SerializeField]Text[] rankingText = new Text[5];
@@ -20,7 +18,7 @@ public class Ranking : MonoBehaviour
         Setranking(currentScore);
         for (int i = 0; i < rankingText.Length; i++)
         {
-            rankingText[i].text = rankingValue[i].ToString("f2");
+            rankingText[i].text = rankingValue[i].ToString("0").Replace("1", " 1"); ;
         }
         if(Delete) PlayerPrefs.DeleteAll();
     }

@@ -17,7 +17,10 @@ public class MapObstacleSet : MonoBehaviour
     [SerializeField] private GameObject _dashPanel;
 
     [Header("ダッシュパネルを出す確率(?/100)")]
-    [SerializeField] private int _dashP = 2;
+    [SerializeField] private int _makeDashPersent = 20;
+
+    [Header("オブジェクトの生成量")]
+    [SerializeField, Range(0f, 10f)]int[] _setNums;
 
     private bool _isDash = false;
 
@@ -28,53 +31,28 @@ public class MapObstacleSet : MonoBehaviour
 
     private void Setting(Transform parent)
     {
-        int setNum = 0;
-        switch (GameManager.Instance.NowGear)
-        {
-            case GameManager.Gear.Gear0:
-                setNum = 3;
-                break;
-            case GameManager.Gear.Gear1:
-                setNum = 3;
-                break;
-            case GameManager.Gear.Gear2:
-                setNum = 2;
-                break;
-            case GameManager.Gear.Gear3:
-                setNum = 2;
-                break;
-            case GameManager.Gear.Gear4:
-                setNum = 8;
-                break;
-            case GameManager.Gear.Gear5:
-                setNum = 8;
-
-                break;
-        }
-
+        int setNum = _setNums[(int)GameManager.Instance.NowGear];
+        print("setnum" + setNum);
         for (int i = 0; i < setNum; i++)
         {
-            int r = Random.Range(0, 100);
-
-            if (r > _dashP)
+            int randomInt = Random.Range(0, 100);
+            if ( _makeDashPersent > randomInt && !_isDash)
             {
-                int objR = Random.Range(0, _obstacles.Count);
-                Debug.Log("Spown"+i);
-                var go = Instantiate(_obstacles[objR]);
-                go.transform.SetParent(_obstaclePos[i]);
-                int randamX = (int)Random.Range(-_side, _side);
-                go.transform.localPosition = Vector3.zero + new Vector3(randamX, 0, 0);
-            }
-            else
-            {
-                if (_isDash) return;
-
                 var go = Instantiate(_dashPanel);
                 int randamX = (int)Random.Range(-_side, _side);
                 go.transform.SetParent(_obstaclePos[i]);
                 go.transform.localPosition = Vector3.zero + new Vector3(randamX, 0, 0);
-                go.transform.GetChild(0).transform.localRotation = Quaternion.Euler(new Vector3(75,0,0));
+                go.transform.GetChild(0).transform.localRotation = Quaternion.Euler(new Vector3(75, 0, 0));
                 _isDash = true;
+            }
+            else
+            {
+                int objR = Random.Range(0, _obstacles.Count);
+                Debug.Log("Spown" + i);
+                var go = Instantiate(_obstacles[objR]);
+                go.transform.SetParent(_obstaclePos[i]);
+                int randamX = (int)Random.Range(-_side, _side);
+                go.transform.localPosition = Vector3.zero + new Vector3(randamX, 0, 0);
             }
         }
     }
