@@ -29,7 +29,7 @@ public class UI : MonoBehaviour
 
     public void ScoreText(int score)
     {
-        scoreText.text = score.ToString("0000");
+        scoreText.text = score.ToString("000000");
     }
     public void SpeedText(float speed)
     {
@@ -45,6 +45,6 @@ public class UI : MonoBehaviour
             () => _drawValue,
             value => _drawValue = value,
             endValue,
-            duration).OnUpdate(() => scoreText.text = _drawValue.ToString());
+            duration).OnUpdate(() => scoreText.text = _drawValue.ToString("000000"));
     }
 }

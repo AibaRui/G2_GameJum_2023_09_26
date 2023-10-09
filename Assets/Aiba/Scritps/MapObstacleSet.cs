@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GameManager;
 
 public class MapObstacleSet : MonoBehaviour
 {
@@ -31,8 +32,7 @@ public class MapObstacleSet : MonoBehaviour
 
     private void Setting(Transform parent)
     {
-        int setNum = _setNums[(int)GameManager.Instance.NowGear];
-        print("setnum" + setNum);
+        int setNum = _setNums[(int)Instance.NowGear];
         for (int i = 0; i < setNum; i++)
         {
             int randomInt = Random.Range(0, 100);
@@ -48,8 +48,9 @@ public class MapObstacleSet : MonoBehaviour
             else
             {
                 int objR = Random.Range(0, _obstacles.Count);
-                Debug.Log("Spown" + i);
                 var go = Instantiate(_obstacles[objR]);
+                if ((int)Instance.NowGear - 3 >= objR)
+                    go.GetComponentInChildren<SpriteRenderer>().color = Color.white;
                 go.transform.SetParent(_obstaclePos[i]);
                 int randamX = (int)Random.Range(-_side, _side);
                 go.transform.localPosition = Vector3.zero + new Vector3(randamX, 0, 0);

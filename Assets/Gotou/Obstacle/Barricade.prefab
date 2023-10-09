@@ -47,6 +47,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: d37bf98e14dc4fe4ba501045dc0cc0d6, type: 3}
+    - target: {fileID: 1404182249865875313, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4829484314896952673, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
       propertyPath: m_Name
       value: Barricade
@@ -105,4 +109,5 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
+    - {fileID: 1930308655913184642, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1be258135bd44ed48b08e6cf4ec30f38, type: 3}

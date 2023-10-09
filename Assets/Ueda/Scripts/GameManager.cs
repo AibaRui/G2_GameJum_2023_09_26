@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     public Gear NowGear => _nowGear;
     public UnityEvent StartEvent;
     public UnityEvent EndEvent;
+    public UnityEvent<Gear> GearChangeEvent;
     void Start()
     {
         _currentTime = _timeLimit;
@@ -92,7 +93,7 @@ public class GameManager : MonoBehaviour
             _currentTime -= Time.deltaTime;
             _currentSpeed += ((GearSpeed[_nowGear] - _currentSpeed) / _gearCollection[(int)_nowGear]) * _speedUpRate * Time.deltaTime ;
             GearObserve(_currentSpeed);
-            _UIcomp.TimeText(_currentTime);
+            _UIcomp.TimeText(_currentTime > 0 ? _currentTime : 0);
             _UIcomp.slider(_currentSpeed);
             _UIcomp.SpeedText(_currentSpeed);
             if ( _currentTime < 0.0f )
@@ -137,16 +138,20 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.PlaySE(AudioManager.EngineSEType.GearChange);
             AudioManager.Instance.PlaySE((AudioManager.EngineSEType)gear + (int)AudioManager.EngineSEType.GearChange);
             _UIcomp.SliderValue(GearSpeed[_nowGear], GearSpeed[gear]);
+
         }
+        GearChangeEvent?.Invoke(gear);
         _nowGear = gear;
-               _UIcomp.gameObject.GetComponentInChildren<SpeedUISwicher>().ChangeSprite((int)_nowGear);
+        _UIcomp.gameObject.GetComponentInChildren<SpeedUISwicher>().ChangeSprite((int)_nowGear);
     }
     void GameOver()
     {
         _isActive = false;
-        SaveScore.ScoreSave(CurrentScore);
         EndEvent?.Invoke();
         AudioManager.Instance.PlaySE(AudioManager.SEType.Goal);
+        SaveData.ScoreSave(CurrentScore);
+        SaveData.SpeedSave(CurrentSpeed);
+
     }
     public void ToResultScene()
     {
@@ -154,19 +159,27 @@ public class GameManager : MonoBehaviour
     }
     public void AddScore(int score)
     {
-        _UIcomp.Play(_currentScore , (_currentScore + score > 0) ? _currentScore + score : 0 , _UIduration);
-        _currentScore += score ;
-        if(_currentScore < 0 )
+        if (_isActive)
         {
-            _currentScore = 0;
+            _UIcomp.Play(_currentScore, (_currentScore + score > 0) ? _currentScore + score : 0, _UIduration);
+            _currentScore += score;
+            if (_currentScore < 0)
+            {
+                _currentScore = 0;
+            }
         }
+
     }
     public void AddSpeed(float speed)
     {
-        _currentSpeed += speed ;
-        if(_currentSpeed < 0 )
+        if (_isActive)
         {
-            _currentSpeed= 0;
+            _currentSpeed += speed;
+            if (_currentSpeed < 0)
+            {
+                _currentSpeed = 0;
+            }
         }
+
     }
 }

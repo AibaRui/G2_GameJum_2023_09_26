@@ -11,7 +11,19 @@ public class ObstacleManager : MonoBehaviour, IDamageble
     [SerializeField] float _waitTime = 0;
     [SerializeField] SpriteRenderer _spriteRenderer = null;
     [SerializeField] Transform _spriteTransform = null;
-
+    void OnEnable()
+    {
+        GameManager.Instance.GearChangeEvent.AddListener(ActiveBreakale);
+    }
+    void OnDisable()
+    {
+        GameManager.Instance.GearChangeEvent.RemoveListener(ActiveBreakale);
+    }
+    public void ActiveBreakale(GameManager.Gear gear)
+    {
+        if (gear >= _breakGear)
+            GetComponentInChildren<SpriteRenderer>().color = Color.white;
+    }
     public void Hit()
     {
         if (GameManager.Instance.NowGear >= _breakGear)
