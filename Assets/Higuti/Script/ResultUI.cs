@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
+using unityroom.Api;
 
 public class ResultUI : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class ResultUI : MonoBehaviour
         _resultSpeedF2.text = (SaveData.ResultSpeed % 1).ToString(".00");
         _highScore.text = SaveData.HighScore.ToString("000000");
         _maxSpeedD4.text = SaveData.MaxSpeed.ToString("0000");
-        _maxSpeedF2.text = (SaveData.MaxSpeed % 1).ToString(".00");
+        _maxSpeedF2.text = (SaveData.MaxSpeed % 1.0f).ToString(".00");
         if (SaveData.ResultScore == SaveData.HighScore)
             _newScoreImage.SetActive(true);
         else
@@ -32,5 +33,8 @@ public class ResultUI : MonoBehaviour
             _newSpeedImage.SetActive(true);
         else
             _newSpeedImage.SetActive(false);
+
+        UnityroomApiClient.Instance.SendScore(0, SaveData.ResultScore, ScoreboardWriteMode.Always);
+        UnityroomApiClient.Instance.SendScore(1, SaveData.ResultSpeed, ScoreboardWriteMode.Always);
     }
 }
