@@ -21,10 +21,10 @@ public class ResultUI : MonoBehaviour
     {
         _resultScore.text = SaveData.ResultScore.ToString("000000");
         _resultSpeedD4.text = SaveData.ResultSpeed.ToString("0000");
-        _resultSpeedF2.text = (SaveData.ResultSpeed % 1).ToString(".00");
+        _resultSpeedF2.text = ((float)(SaveData.ResultSpeed % 1)).ToString(".00");
         _highScore.text = SaveData.HighScore.ToString("000000");
         _maxSpeedD4.text = SaveData.MaxSpeed.ToString("0000");
-        _maxSpeedF2.text = (SaveData.MaxSpeed % 1.0f).ToString(".00");
+        _maxSpeedF2.text = ((float)(SaveData.MaxSpeed % 1.0f)).ToString(".00");
         if (SaveData.ResultScore == SaveData.HighScore)
             _newScoreImage.SetActive(true);
         else
@@ -34,7 +34,7 @@ public class ResultUI : MonoBehaviour
         else
             _newSpeedImage.SetActive(false);
 
-        UnityroomApiClient.Instance.SendScore(0, SaveData.ResultScore, ScoreboardWriteMode.Always);
-        UnityroomApiClient.Instance.SendScore(1, SaveData.ResultSpeed, ScoreboardWriteMode.Always);
+        UnityroomApiClient.Instance.SendScore(1, SaveData.ResultScore, ScoreboardWriteMode.Always);
+        UnityroomApiClient.Instance.SendScore(2, SaveData.ResultSpeed, ScoreboardWriteMode.Always);
     }
 }
